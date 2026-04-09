@@ -1,0 +1,110 @@
+:root {
+  /* Default/Original Theme */
+  --bg-color: #f3f5f8;
+  --panel-bg: #ebf0f5;
+  --panel-bg-glass: rgba(235, 240, 245, 0.7);
+  --text-main: #334155;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+  --accent-color: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-light: #e0e7ff;
+  --success-color: #10b981;
+  --danger-color: #ef4444;
+  --warning-color: #f59e0b;
+  
+  --shadow-light: -6px -6px 12px rgba(255, 255, 255, 0.8);
+  --shadow-dark: 6px 6px 12px rgba(166, 180, 200, 0.4);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  --shadow-inset-light: inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+  --shadow-inset-dark: inset 4px 4px 8px rgba(166, 180, 200, 0.4);
+  
+  --border-radius-lg: 24px;
+  --border-radius: 16px;
+  --border-radius-sm: 10px;
+}
+
+[data-theme='earthy'] {
+  --bg-color: #dbe0e6;       /* Cloudy 3:00 pm */
+  --panel-bg: #e5d1d1;       /* Linen skirt */
+  --panel-bg-glass: rgba(229, 209, 209, 0.7);
+  --text-main: #2a5654;      /* Melted candle sticks */
+  --text-muted: #5e7a78;
+  --text-inverse: #ffffff;
+  --accent-color: #8a9445;   /* Matcha latte foam */
+  --accent-hover: #727c36;
+  --accent-light: #c8b2ce;   /* Gingham tablecloth */
+  --success-color: #99bdc1;  /* Rubber clogs */
+  --danger-color: #771c31;   /* Sparkling wine */
+  --warning-color: #d5c472;  /* Lemon water */
+
+  --shadow-light: -6px -6px 12px rgba(255, 255, 255, 0.6);
+  --shadow-dark: 6px 6px 12px rgba(170, 180, 190, 0.4);
+  --shadow-inset-light: inset -4px -4px 8px rgba(255, 255, 255, 0.6);
+  --shadow-inset-dark: inset 4px 4px 8px rgba(170, 180, 190, 0.4);
+}
+
+[data-theme='candy'] {
+  --bg-color: #FFF183;       /* Maize */
+  --panel-bg: #ffffff;
+  --panel-bg-glass: rgba(255, 255, 255, 0.8);
+  --text-main: #4a4a4a;
+  --text-muted: #888888;
+  --text-inverse: #ffffff;
+  --accent-color: #FAA4B5;   /* Cherry Blossom Pink */
+  --accent-hover: #ef8b9f;
+  --accent-light: #F8B77C;   /* Fawn */
+  --success-color: #82BA88;  /* Olivine */
+  --danger-color: #ff6b6b;
+  --warning-color: #F8B77C;  /* Fawn */
+
+  --shadow-light: -6px -6px 12px rgba(255, 255, 255, 0.8);
+  --shadow-dark: 6px 6px 12px rgba(200, 200, 200, 0.4);
+  --shadow-inset-light: inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+  --shadow-inset-dark: inset 4px 4px 8px rgba(200, 200, 200, 0.2);
+}
+
+[data-theme='celtic'] {
+  --bg-color: #fbfcee;       /* Ivory */
+  --panel-bg: #f6eca5;       /* Vanilla */
+  --panel-bg-glass: rgba(246, 236, 165, 0.8);
+  --text-main: #343b1b;      /* Drab Dark Brown */
+  --text-muted: #6e7943;
+  --text-inverse: #ffffff;
+  --accent-color: #3971b8;   /* Celtic Blue */
+  --accent-hover: #2d5a94;
+  --accent-light: #b0c4de;
+  --success-color: #c8d69b;  /* Tea Green */
+  --danger-color: #e63946;
+  --warning-color: #fca311;
+
+  --shadow-light: -6px -6px 12px rgba(255, 255, 255, 0.9);
+  --shadow-dark: 6px 6px 12px rgba(210, 200, 140, 0.5);
+  --shadow-inset-light: inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+  --shadow-inset-dark: inset 4px 4px 8px rgba(210, 200, 140, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(79, 70, 229, 0.04), transparent 30%),
+    radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.04), transparent 30%);
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
