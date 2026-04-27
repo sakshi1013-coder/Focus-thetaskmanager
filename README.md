@@ -28,29 +28,7 @@ task-manager/
 └── README.md
 ```
 
-## Setup and Run Instructions
 
-### Prerequisites
-- Node.js (v14 or above)
-- npm or yarn
-
-### 1. Start the Backend
-Open a terminal and navigate to the `backend` directory:
-```bash
-cd backend
-npm install
-node server.js
-```
-The backend server will start running on `http://localhost:3001`.
-
-### 2. Start the Frontend
-Open a new terminal window and navigate to the `frontend` directory:
-```bash
-cd frontend
-npm install
-npm run dev
-```
-The frontend Vite server will be available (typically at `http://localhost:5173`). Click the link in your terminal to open the app.
 
 ## Assumptions & Trade-offs
 1. **File-based Storage**: Rather than configuring a full database (PostgreSQL, MongoDB, or even SQLite), a simple JSON file read/write approach was used to meet the "in-memory or file-based storage is acceptable" criteria. This keeps setup time to near-zero for reviewers. 
