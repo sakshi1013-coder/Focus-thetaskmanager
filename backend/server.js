@@ -10,10 +10,14 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
 const dataFile = path.join(__dirname, 'tasks.json');
+const usersFile = path.join(__dirname, 'users.json');
 
-// Ensure data file exists
+// Ensure data files exist
 if (!fs.existsSync(dataFile)) {
   fs.writeFileSync(dataFile, JSON.stringify([]));
+}
+if (!fs.existsSync(usersFile)) {
+  fs.writeFileSync(usersFile, JSON.stringify([]));
 }
 
 // Helper to read tasks
@@ -31,15 +35,58 @@ const writeTasks = (tasks) => {
   fs.writeFileSync(dataFile, JSON.stringify(tasks, null, 2));
 };
 
+const readUsers = () => {
+  try {
+    const data = fs.readFileSync(usersFile, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    return [];
+  }
+};
+
+const writeUsers = (users) => {
+  fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
+};
+
+// POST /api/auth/register
+app.post('/api/auth/register', (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) return res.status(400).json({ error: 'Username and password required' });
+  const users = readUsers();
+  if (users.find(u => u.username === username)) {
+    return res.status(400).json({ error: 'User already exists' });
+  }
+  const newUser = { id: crypto.randomUUID(), username, password };
+  users.push(newUser);
+  writeUsers(users);
+  res.json({ message: 'Registered successfully', user: { id: newUser.id, username: newUser.username } });
+});
+
+// POST /api/auth/login
+app.post('/api/auth/login', (req, res) => {
+  const { username, password } = req.body;
+  const users = readUsers();
+  const user = users.find(u => u.username === username && u.password === password);
+  if (!user) {
+    return res.status(401).json({ error: 'Invalid credentials' });
+  }
+  res.json({ message: 'Login successful', user: { id: user.id, username: user.username } });
+});
+
 // GET /tasks
 app.get('/api/tasks', (req, res) => {
+  const { userId } = req.query;
   const tasks = readTasks();
-  res.json(tasks);
+  if (userId) {
+    res.json(tasks.filter(t => t.userId === userId));
+  } else {
+    res.json(tasks);
+  }
 });
 
 // POST /tasks
 app.post('/api/tasks', (req, res) => {
-  const { title } = req.body;
+  const { title, userId } = req.body;
   if (!title || typeof title !== 'string' || title.trim() === '') {
     return res.status(400).json({ error: 'Title is required and must be a non-empty string' });
   }
@@ -49,6 +96,7 @@ app.post('/api/tasks', (req, res) => {
     id: crypto.randomUUID(),
     title: title.trim(),
     completed: false,
+    userId: userId || 'anonymous',
     createdAt: new Date().toISOString()
   };
 
